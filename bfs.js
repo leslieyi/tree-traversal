@@ -83,7 +83,7 @@ class BinarySearchTree {
   }
 
   DFSPreOrder() {
-      //visit the entire left side and entire right side
+    //visit the entire left side and entire right side
     let data = [];
     let current = this.root;
     function traverse(node) {
@@ -92,6 +92,19 @@ class BinarySearchTree {
       if (node.right) traverse(node.right);
     }
     traverse(current); //current is the root, user can specify a node to start from, no need to traverse from root all the time, could do traverse(this.root)
+    return data;
+  }
+
+  DFSPostOrder() {
+      //exact same code just different order
+    let data = [];
+    function traverse(node) {
+      //we are going to push later
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      data.push(node.value);
+    }
+    traverse(this.root);
     return data;
   }
 }
