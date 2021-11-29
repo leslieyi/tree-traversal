@@ -66,7 +66,7 @@ class BinarySearchTree {
     return false;
   }
   BFS() {
-      //q = fifo
+    //q = fifo
     let node = this.root,
       data = [],
       queue = []; //take things from beginning, and add to the end
@@ -74,11 +74,24 @@ class BinarySearchTree {
 
     while (queue.length) {
       //empty array is truthy in js so we do .length
-      node = queue.shift();//take from the beginning from queue
+      node = queue.shift(); //take from the beginning from queue
       data.push(node.value); //adding into our list //just to make things to see, node.value
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
+    return data;
+  }
+
+  DFSPreOrder() {
+      //visit the entire left side and entire right side
+    let data = [];
+    let current = this.root;
+    function traverse(node) {
+      data.push(node.value);
+      if (node.left) traverse(node.left); //recursively calling
+      if (node.right) traverse(node.right);
+    }
+    traverse(current); //current is the root, user can specify a node to start from, no need to traverse from root all the time, could do traverse(this.root)
     return data;
   }
 }
@@ -91,3 +104,6 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(20);
 tree.BFS();
+tree.DFSPreOrder();
+console.log(tree.BFS());
+console.log(tree.DFSPreOrder());
