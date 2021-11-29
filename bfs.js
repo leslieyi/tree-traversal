@@ -96,13 +96,25 @@ class BinarySearchTree {
   }
 
   DFSPostOrder() {
-      //exact same code just different order
+    //exact same code just different order
     let data = [];
     function traverse(node) {
       //we are going to push later
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
       data.push(node.value);
+    }
+    traverse(this.root);
+    return data;
+  }
+  DFSInOrder() {
+    //exact same code just ONE different order
+    let data = [];
+    function traverse(node) {
+      //we are going to push later
+      if (node.left) traverse(node.left);
+      data.push(node.value); //traverse the left and push, then visit the right side.
+      if (node.right) traverse(node.right);
     }
     traverse(this.root);
     return data;
@@ -118,5 +130,7 @@ tree.insert(8);
 tree.insert(20);
 tree.BFS();
 tree.DFSPreOrder();
-console.log(tree.BFS());
-console.log(tree.DFSPreOrder());
+console.log(tree.BFS());          //[ 10, 6, 15, 3, 8, 20 ]
+console.log(tree.DFSPreOrder());  //[ 10, 6, 3, 8, 15, 20 ]
+console.log(tree.DFSPostOrder()); //[ 3, 8, 6, 20, 15, 10 ]
+console.log(tree.DFSInOrder());   //[ 3, 6, 8, 10, 15, 20 ]
